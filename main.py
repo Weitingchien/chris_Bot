@@ -2,16 +2,23 @@
 #from datetime import datetime
 #from threading import Timer
 import os
+import random
 import asyncio
 import requests
 import aiohttp
 from dotenv import load_dotenv
 import discord
 from discord.ext import commands, tasks
+# scraoy
+#from scrapy.proxy import sslProxies
+from scrapy.ytNotification import ytNotification
 
 
 # MongoDB
 import motor.motor_asyncio
+
+# MySQL
+import pymysql
 
 # Scheduler , timezone
 import zoneinfo
@@ -34,10 +41,11 @@ class MyClient(commands.Bot):
 
     def __init__(self, intents):
         super().__init__(command_prefix="!", intents=intents,
-                         application_id=os.getenv("application_id"))
+                         application_id=os.getenv("applicationID"))
         self.initial_extensions = []
         # For storing user who sign-in in the server
         self.usersSignInTemp = []
+        self.countOfReRequest = 0
 
     async def setup_hook(self) -> None:
         await self.backgroundTask()
@@ -76,49 +84,46 @@ class MyClient(commands.Bot):
 
         scheduler.add_job(checkTime, "cron", hour=6,
                           minute=0, misfire_grace_time=60)
+
         scheduler.add_job(
-            reset, "cron", [self], hour=0, minute=36, misfire_grace_time=60)  # misfire_grace_time  防止時間沒有剛好在整點執行 0:00:01.433713 最大誤差值允許為60秒
+            reset, "cron", [self], hour=0, minute=0, misfire_grace_time=60)  # misfire_grace_time  防止時間沒有剛好在整點執行 0:00:01.433713 最大誤差值允許為60秒
+
+        scheduler.add_job(ytNotification, "interval", [
+                          self, 0], minutes=5, misfire_grace_time=240)
+
+        # scheduler.add_job()
+
         scheduler.start()
 
     async def on_ready(self) -> None:
-
+        print("on_ready")
         # Waiting for the bot to connect
         await self.wait_until_ready()
         # If found than return the guild
         guild = self.get_guild(testServerIDInt)
+        print(guild)
 
         overwrites = {
             guild.default_role: discord.PermissionOverwrite(send_messages=False)}
-        videoCategoryName = "---自動推播專區---"
-        announcement = "---公告區---"
-        annName = "重要公告"
-        ytName = "youtube"
+        videoCategoryName = "---youtube自動推播專區---"
+        #announcement = "---公告區---"
+        #annName = "重要公告"
+        fpsName = "apex"
         await createCategory(self, guild, overwrites, videoCategoryName, announcement)
-
-        announcementCategory = discord.utils.get(
-            guild.categories, name=announcement)
 
         videoCategory = discord.utils.get(
             guild.categories, name=videoCategoryName)
 
-        announcementChannel = discord.utils.get(
-            guild.text_channels, name=annName)
+        apexChannel = discord.utils.get(guild.text_channels, name=fpsName)
 
-        youtubeChannel = discord.utils.get(guild.text_channels, name=ytName)
-
-        if announcementChannel is None:
-            print("創建重要公告頻道 正在建立...")
-            await guild.create_text_channel(annName, overwrites=overwrites, category=announcementCategory)
-            print("創建重要公告頻道 建立成功...")
-
-        if youtubeChannel is None:
-            print("創建youtube頻道 正在建立...")
-            await guild.create_text_channel(ytName, overwrites=overwrites, category=videoCategory)
-            print("創建youtube頻道 建立成功...")
+        if apexChannel is None:
+            print("創建Apex頻道 正在建立...")
+            await guild.create_text_channel(fpsName, overwrites=overwrites, category=videoCategory)
+            print("創建Apex頻道 建立成功...")
 
         print(
             f"Bot's name: {self.user.name} Version: { discord.__version__}")
-        await self.change_presence(activity=discord.Game("Im online"))
+        await self.change_presence(activity=discord.Game("-"))
 
     async def on_member_join(self, member) -> None:
         print(f"{member} has joined the server.")
@@ -150,29 +155,44 @@ class MyClient(commands.Bot):
 
 
 async def createCategory(self, guild, overwrites, videoCategoryName, announcement) -> None:
-    print("---公告區--- 正在建立...")
-    print("---自動推播專區--- 正在建立...")
-    ann = discord.utils.get(guild.categories, name=announcement)
+    #print("---公告區--- 正在建立...")
+    print("---youtube自動推播專區--- 正在建立...")
+    #ann = discord.utils.get(guild.categories, name=announcement)
     video = discord.utils.get(guild.categories, name=videoCategoryName)
-    print(f"{ann} 先前已建立")
+    #print(f"{ann} 先前已建立")
     print(f"{video} 先前已建立")
+    """
     if ann is None:
         await guild.create_category(announcement)
         print("---公告區--- 建立成功")
+    """
     if video is None:
         await guild.create_category(videoCategoryName)
-        print("---自動推播專區--- 建立成功")
+        print("---youtube自動推播專區--- 建立成功")
 
 
 intents = discord.Intents.default()
 intents.members = True
 client = MyClient(intents=intents)
 
+# DB(MySQL) configuration
+dbConfig = {
+    "host": os.getenv("CLEARDB_HOST"),
+    "port": int(os.getenv("CLEARDB_PORT")),
+    "user": os.getenv("CLEARDB_USER"),
+    "password": os.getenv("CLEARDB_DBPWD"),
+    "db": os.getenv("CLEARDB_DB"),
+    "charset": "utf8"
+}
+
 
 async def main(TOKEN):
     async with client:
+
         client.mongoConnect = motor.motor_asyncio.AsyncIOMotorClient(
-            "mongodb://localhost:27017")
+            os.getenv("MONGODBCONNECTIONSTRING"))
+
+        client.mysqlConnect = pymysql.connect(**dbConfig)
         await client.start(TOKEN)
 
 
