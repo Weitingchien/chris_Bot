@@ -118,8 +118,6 @@ async def pipeLine(self, videoItem):
             int(os.getenv("apexChannelID")))  # Apex channel
         await channel.send(videoItem["videoLink"])
 
-    # self.mongoConnect.close()
-
 
 async def ytNotification(self, countOfReRequest):
     """
