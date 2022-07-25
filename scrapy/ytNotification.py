@@ -3,17 +3,7 @@ import random
 from bs4 import BeautifulSoup
 import asyncio
 from pyppeteer import launch
-from scrapy.proxy import sslProxies
-
-userAgent = [
-    "Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 6.1)",
-    "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko",
-    "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko",
-    "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)",
-    "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko",
-    "Mozilla/5.0 (Windows NT 6.2; WOW64; Trident/7.0; rv:11.0) like Gecko",
-    "Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko",
-]
+#from scrapy.proxy import sslProxies
 
 
 async def getApexChannelVideos(self):
@@ -59,8 +49,6 @@ async def parse(self, soup):
     videosChannelName = soup.find(
         "yt-formatted-string", class_="ytd-channel-name").text
     print(videosChannelName)
-
-    # metaData = soup.find("div", id="metadata-line").find_all("span")
 
     videoLinkParse = str(videosLink).split("=", 1)
     videosID = videoLinkParse[1]
@@ -118,7 +106,7 @@ async def pipeLine(self, videoItem):
 
 
 async def ytNotification(self):
-    browser = await launch({"headless": True, "args": ["--no-sandbox"]})
+    browser = await launch({"headless": True, "args": ["--disable-gpu", "--no-sandbox", "--disable--dev-shm-usage"]})
     page = await browser.newPage()
 
     urls = ["https://www.youtube.com/c/SellyTwitch/videos", "https://www.youtube.com/channel/UCVUmDq4aZ8_gzfCGiRO9KgA/videos",
