@@ -5,7 +5,7 @@ import aiohttp
 from dotenv import load_dotenv
 import discord
 from discord.ext import commands, tasks
-# scraoy
+# scrapy
 #from scrapy.proxy import sslProxies
 from scrapy.ytNotification import ytNotification
 
@@ -100,8 +100,6 @@ class MyClient(commands.Bot):
         overwrites = {
             guild.default_role: discord.PermissionOverwrite(send_messages=False)}
         videoCategoryName = "---youtube自動推播專區---"
-        #announcement = "---公告區---"
-        #annName = "重要公告"
         fpsName = "apex"
         await createCategory(self, guild, overwrites, videoCategoryName, announcement)
 
@@ -149,17 +147,9 @@ class MyClient(commands.Bot):
 
 
 async def createCategory(self, guild, overwrites, videoCategoryName, announcement) -> None:
-    #print("---公告區--- 正在建立...")
     print("---youtube自動推播專區--- 正在建立...")
-    #ann = discord.utils.get(guild.categories, name=announcement)
     video = discord.utils.get(guild.categories, name=videoCategoryName)
-    #print(f"{ann} 先前已建立")
     print(f"{video} 先前已建立")
-    """
-    if ann is None:
-        await guild.create_category(announcement)
-        print("---公告區--- 建立成功")
-    """
     if video is None:
         await guild.create_category(videoCategoryName)
         print("---youtube自動推播專區--- 建立成功")
