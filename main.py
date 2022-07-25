@@ -4,7 +4,6 @@
 import os
 import random
 import asyncio
-import requests
 import aiohttp
 from dotenv import load_dotenv
 import discord
