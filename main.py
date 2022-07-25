@@ -91,8 +91,6 @@ class MyClient(commands.Bot):
         scheduler.add_job(ytNotification, "interval", [
                           self], minutes=5, misfire_grace_time=240)
 
-        # scheduler.add_job()
-
         scheduler.start()
 
     async def on_ready(self) -> None:
