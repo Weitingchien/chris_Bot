@@ -119,18 +119,7 @@ async def pipeLine(self, videoItem):
         await channel.send(videoItem["videoLink"])
 
 
-async def ytNotification(self, countOfReRequest):
-    """
-    await sslProxies(self)
-
-    if countOfReRequest == 0:
-        self.countOfReRequest = 0
-
-    proxyList = await getProxyList(self)
-
-
-    print(f"proxyList: {proxyList}")
-    """
+async def ytNotification(self):
     browser = await launch({"headless": True, "args": ["--no-sandbox"]})
     page = await browser.newPage()
 
