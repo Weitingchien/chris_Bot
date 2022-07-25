@@ -24,8 +24,6 @@ async def getApexChannelVideos(self):
     async for document in cursor:
         apexVideos.append(document["videoTitle"])
 
-    # print(videos)
-
 
 async def getProxyList(self):
     cursor = self.mysqlConnect.cursor()

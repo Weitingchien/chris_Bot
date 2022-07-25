@@ -102,7 +102,6 @@ async def sslProxies(self):
         "user-agent": random.choice(userAgent)
     }
     print(f"user-agent:{headers['user-agent']}")
-    #time.sleep(random.uniform(4, 8))
     ips = []
     if(len(validIps)):
         validIps.clear()

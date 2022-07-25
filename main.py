@@ -1,6 +1,3 @@
-#from pyyoutube import Api
-#from datetime import datetime
-#from threading import Timer
 import os
 import random
 import asyncio
