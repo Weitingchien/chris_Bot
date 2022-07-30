@@ -85,7 +85,7 @@ class MyClient(commands.Bot):
             reset, "cron", [self], hour=0, minute=0, misfire_grace_time=60)  # misfire_grace_time  防止時間沒有剛好在整點執行 0:00:01.433713 最大誤差值允許為60秒
 
         scheduler.add_job(ytNotification, "interval", [
-                          self], minutes=5, misfire_grace_time=240)
+                          self], minutes=5, misfire_grace_time=360)
 
         scheduler.start()
 
