@@ -92,7 +92,6 @@ async def parse(self, soup, channelType):
         "videoChannelName": videosChannelName,
         "videoUploadedTime": videosUploadedTime
     }
-   # print(videoItem)
     await pipeLine(self, videoItem, channelType)
     return videosID
 
