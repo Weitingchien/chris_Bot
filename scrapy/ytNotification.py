@@ -177,7 +177,6 @@ async def ytNotification(self):
         except Exception as e:
             print(e)
             await asyncio.sleep(random.uniform(1, 3))
-            await browser.close()
 
     # J-tracks
     for url in jTracksUrls:
@@ -196,7 +195,6 @@ async def ytNotification(self):
         except Exception as e:
             print(e)
             await asyncio.sleep(random.uniform(3, 5))
-            await browser.close()
 
     for v in videosIDAndChannelsType:
         print(f"v: {v}")
@@ -218,7 +216,6 @@ async def ytNotification(self):
         except Exception as e:
             print(e)
             await asyncio.sleep(random.uniform(2, 4))
-            await browser.close()
 
     await asyncio.sleep(random.uniform(3, 5))
     await browser.close()
