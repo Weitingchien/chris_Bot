@@ -24,7 +24,7 @@ Discord channel:(Channel type currently has Apex and JTracks)
 
 File structure:
 
-/cogs: Responsible for various commands
-/db: Repeated query function are placed here
-/event: Check-in and reset check-in function placed here
-/scrapy/ytNotification.py  crawling youtube
+<p>/cogs: Responsible for various commands</p>
+<p>/db: Repeated query function are placed here</p>
+<p>/event: Check-in and reset check-in function placed here</p>
+<p>/scrapy/ytNotification.py  crawling youtube</p>
