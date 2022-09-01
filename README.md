@@ -8,9 +8,14 @@
 
 ## Features
 
-Using commands to take a gamble and show personal information.
+Command:
 
 ![command](https://i.imgur.com/9ZPRamI.png)
 
-web crawler
+Web crawler:
+
+If the channel uploads a new video, the link will be pushed to the discord channel.
+
+
+<img alt="webCrawler01" src="https://i.imgur.com/So6mMV0.jpg">
 
