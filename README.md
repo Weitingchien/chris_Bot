@@ -16,6 +16,9 @@ Web crawler:
 
 If the channel uploads a new video, the link will be pushed to the discord channel.
 
-
 <img alt="webCrawler01" src="https://i.imgur.com/So6mMV0.jpg">
+
+Discord channel:(Channel type currently has Apex and JTracks)
+
+<img alt="webCrawler01" src="https://i.imgur.com/pcYfZNn.jpg">
 
