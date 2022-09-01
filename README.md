@@ -13,11 +13,11 @@
 
 ## Features
 
-Commands:
+### Commands:
 
 ![command](https://i.imgur.com/9ZPRamI.png)
 
-Web crawler:
+### Web crawler:
 
 If the channel uploads a new video, the link will be pushed to the discord channel.
 
@@ -27,6 +27,6 @@ Discord channel:(Channel type currently has Apex and JTracks)
 
 <img alt="webCrawler01" src="https://i.imgur.com/pcYfZNn.jpg">
 
-## Database:
+### Database:
 
 <img alt="database01" src="https://i.imgur.com/J7ncjc5.png">
