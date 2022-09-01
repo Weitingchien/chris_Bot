@@ -14,7 +14,5 @@ Using commands to take a gamble and show personal information.
 
 ![command](https://i.imgur.com/9ZPRamI.png)
 
-## TODO
+web crawler
 
-- web crawler
-- level system
