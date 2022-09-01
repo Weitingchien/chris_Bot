@@ -11,8 +11,6 @@
 <p>/event: Check-in and reset check-in function placed here</p>
 <p>/scrapy/ytNotification.py:  crawling youtube</p>
 
-## Description
-
 ## Features
 
 Commands:
