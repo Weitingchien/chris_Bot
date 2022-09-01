@@ -14,7 +14,7 @@ from scrapy.ytNotification import ytNotification
 import motor.motor_asyncio
 
 # MySQL
-import pymysql
+# import pymysql
 
 # Scheduler , timezone
 import zoneinfo
@@ -160,6 +160,7 @@ intents.members = True
 client = MyClient(intents=intents)
 
 # DB(MySQL) configuration
+"""
 dbConfig = {
     "host": os.getenv("CLEARDB_HOST"),
     "port": int(os.getenv("CLEARDB_PORT")),
@@ -168,6 +169,7 @@ dbConfig = {
     "db": os.getenv("CLEARDB_DB"),
     "charset": "utf8"
 }
+"""
 
 
 async def main(TOKEN):
@@ -176,7 +178,7 @@ async def main(TOKEN):
         client.mongoConnect = motor.motor_asyncio.AsyncIOMotorClient(
             os.getenv("MONGODBCONNECTIONSTRING"))
 
-        client.mysqlConnect = pymysql.connect(**dbConfig)
+        """client.mysqlConnect = pymysql.connect(**dbConfig)"""
         await client.start(TOKEN)
 
 

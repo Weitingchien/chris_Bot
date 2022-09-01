@@ -1,3 +1,6 @@
+"""
+test
+
 import os
 import time
 import random
@@ -176,3 +179,4 @@ async def proxyCheckAvailable(proxy, session):
             return response.status
     except:
         return "invalid"
+"""
