@@ -6,8 +6,6 @@
 
 ## Description
 
-Creating a bot that has an economic system, level system, sign-in system, and crawls some websites to access information.
-
 ## Features
 
 Using commands to take a gamble and show personal information.
