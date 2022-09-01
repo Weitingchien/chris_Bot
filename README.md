@@ -8,7 +8,7 @@
 
 ## Features
 
-Command:
+Commands:
 
 ![command](https://i.imgur.com/9ZPRamI.png)
 
@@ -22,3 +22,9 @@ Discord channel:(Channel type currently has Apex and JTracks)
 
 <img alt="webCrawler01" src="https://i.imgur.com/pcYfZNn.jpg">
 
+File structure:
+
+/cogs: Responsible for various commands
+/db: Repeated query function are placed here
+/event: Check-in and reset check-in function placed here
+/scrapy/ytNotification.py  crawling youtube
