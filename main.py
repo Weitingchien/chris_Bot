@@ -45,7 +45,7 @@ class MyClient(commands.Bot):
 
     async def setup_hook(self) -> None:
         await self.backgroundTask()
-        self.session = aiohttp.ClientSession()
+        #self.session = aiohttp.ClientSession()
         await self.load_cogs()
         await client.tree.sync(guild=testServerID)
 

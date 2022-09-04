@@ -150,7 +150,7 @@ async def imagePipeLine(self, videoItem, videoID, channelType):
 
 
 async def ytNotification(self):
-    browser = await launch({"headless": True, "args": ["--disable-gpu", "--no-sandbox", "--disable--dev-shm-usage"]})
+    browser = await launch({"headless": True, "args": ["--disable-gpu", "--no-sandbox", "--disable--dev-shm-usage"], "autoClose": False})
     page = await browser.newPage()
 
     apexUrls = ["https://www.youtube.com/c/SellyTwitch/videos", "https://www.youtube.com/channel/UCVUmDq4aZ8_gzfCGiRO9KgA/videos",
