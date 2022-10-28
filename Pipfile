@@ -36,7 +36,7 @@ aiohttp = "*"
 dnspython = "*"
 beautifulsoup4 = "*"
 pymysql = "*"
-pyppeteer = "*"
+pyppeteer = {git = "https://github.com/pyppeteer/pyppeteer"}
 
 [dev-packages]
 

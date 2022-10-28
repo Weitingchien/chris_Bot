@@ -51,7 +51,7 @@ class MyClient(commands.Bot):
 
     async def close(self):
         await super().close()
-        await self.session.close()
+        # await self.session.close()
 
     async def load_cogs(self) -> None:
         for filename in os.listdir("./cogs"):
